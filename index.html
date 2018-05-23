@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gif-tastic!</title>
+</head>
+<body>
+    <!-- html here -->
+    <div id="moodButtons">
+    </div>
+
+    <form id="mood-form">
+        <label for="mood-input">Add a mood</label>
+        <input type="text" id="mood-input">
+    </form>
+
+    <div id="moods">
+    </div>
+    
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //onclick event listener
+        $("<button>").on("click", function () {
+
+        //to add the button's topic to the queryURL
+        var topic = $(this).attr("data-item");
+
+        //queryURL and API key
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "nbFBZtTWn5t69XGfIAyKL0wRNdAlEuBk";
+
+        //ajax GET method
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        //then function to say what to do with the gifs
+        .then(function(response) {
+            
+        });
+        //
+
+        //
+    </script>
+</body>
+</html>
