@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gif-tastic!</title>
+    <style rel="stylesheet" type="text/css" href="assets/css/reset.css"></style>
+    <style rel="stylesheet" type="text/css" href="assets/css/style.css"></style>
+
 </head>
 <body>
     <!-- html here -->
-    <div id="moodButtons">
+    <div id="moodButtons" class="existing">
+        <button data-item="happy">Happy</button>
+        <button data-item="sad">Sad</button>
+        <button data-item="sild">Wild</button>
+        <button data-item="sappy">Sappy</button>
+        <button data-item="angry">Angry</button>
+        <button data-item="funky">Funky</button>
+        <button data-item="rad">Rad</button>
+        <button data-item="dancing">Dancy</button>
+    </div>
+
+    <div id="newMoodButtons" class="new">
     </div>
 
     <form id="mood-form">
@@ -16,10 +30,11 @@
         <input type="text" id="mood-input">
     </form>
 
-    <div id="moods">
+    <div id="mood-gifs">
     </div>
     
 
+<!-- JS BELOW _______________________________________________________________________________________________-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
@@ -30,7 +45,7 @@
         var topic = $(this).attr("data-item");
 
         //queryURL and API key
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "nbFBZtTWn5t69XGfIAyKL0wRNdAlEuBk";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=nbFBZtTWn5t69XGfIAyKL0wRNdAlEuBk&limit=10";
 
         //ajax GET method
         $.ajax({
@@ -39,6 +54,31 @@
       })
         //then function to say what to do with the gifs
         .then(function(response) {
+            
+            var results = response.data;
+
+            for (var i = 0; i < results.length; i++) {
+
+                if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
+                //store the gif rating and print it to screen
+                    var rating = results[i].rating;
+
+                    var p = $("<p>").text("Rating: " + rating);
+
+                //create an image tag to store the pulled gif in. Gif link from giphy put into the src within that new img tag.
+                    var moodImage = $("<img>");
+                    moodImage.attr("src", results[i].images.fixed_height.url);
+                
+                //appending rating text and mood gifs to the appropriate div
+                $("#mood-gifs").append(p);
+                $("#mood-gifs").append(moodButton);
+
+                
+                }
+                
+            }
+            
             
         });
         //
