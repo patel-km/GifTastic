@@ -5,82 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gif-tastic!</title>
-    <style rel="stylesheet" type="text/css" href="assets/css/reset.css"></style>
-    <style rel="stylesheet" type="text/css" href="assets/css/style.css"></style>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
     <!-- html here -->
-    <div id="moodButtons" class="existing">
-        <button data-item="happy">Happy</button>
-        <button data-item="sad">Sad</button>
-        <button data-item="sild">Wild</button>
-        <button data-item="sappy">Sappy</button>
-        <button data-item="angry">Angry</button>
-        <button data-item="funky">Funky</button>
-        <button data-item="rad">Rad</button>
-        <button data-item="dancing">Dancy</button>
-    </div>
+    <div class="container">
 
-    <div id="newMoodButtons" class="new">
-    </div>
+        <div id="moodButtons">
+            <button class="existing" data-item="happy">Happy</button>
+            <button class="existing" data-item="sad">Sad</button>
+            <button class="existing" data-item="sild">Wild</button>
+            <button class="existing" data-item="sappy">Sappy</button>
+            <button class="existing" data-item="angry">Angry</button>
+            <button class="existing" data-item="funky">Funky</button>
+            <button class="existing" data-item="rad">Rad</button>
+            <button class="existing" data-item="dancing">Dancy</button>
+        </div>
+    
+        <div id="newMoodButtons" class="new">
+        </div>
+    
+        <div id="formBox">
+            <form id="mood-form">
+                <label for="mood-input">Add a mood</label>
+                <br>
+                <br>
+                <input type="text" id="mood-input">
+                <br>
+                <br>
+                <button class="submit">Submit</button>
+            </form>
+        </div>
+        
+    
+        <div id="mood-gifs">
+        </div>
 
-    <form id="mood-form">
-        <label for="mood-input">Add a mood</label>
-        <input type="text" id="mood-input">
-    </form>
-
-    <div id="mood-gifs">
     </div>
+    
     
 
 <!-- JS BELOW _______________________________________________________________________________________________-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-        //onclick event listener
-        $("<button>").on("click", function () {
+//we will have 3 onclick functions -- one for existing buttons, one for the submit input, and one for the new buttons
+    //onclick event listener for existing buttons
+        $(".existing").on("click", function () {
+            
+        //clear old results
+        $("#mood-gifs").empty();
 
         //to add the button's topic to the queryURL
-        var topic = $(this).attr("data-item");
+        var mood = $(this).attr("data-item");
 
         //queryURL and API key
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=nbFBZtTWn5t69XGfIAyKL0wRNdAlEuBk&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        mood + "&api_key=dc6zaTOxFJmzC&limit=10"
+        
+        //"https://api.giphy.com/v1/gifs/search?q=" + mood + "&api_key=nbFBZtTWn5t69XGfIAyKL0wRNdAlEuBk&limit=10";
 
         //ajax GET method
         $.ajax({
         url: queryURL,
         method: "GET"
       })
+
         //then function to say what to do with the gifs
         .then(function(response) {
             
             var results = response.data;
-
+            //for all the results pulled, only print the ones that are NOT rated R or PG-13
             for (var i = 0; i < results.length; i++) {
 
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
+                
 
                 //store the gif rating and print it to screen
                     var rating = results[i].rating;
 
                     var p = $("<p>").text("Rating: " + rating);
 
-                //create an image tag to store the pulled gif in. Gif link from giphy put into the src within that new img tag.
+                //create an image tag to store the pulled gif into. Set src to the Gif link from giphy, within that new img tag.
                     var moodImage = $("<img>");
                     moodImage.attr("src", results[i].images.fixed_height.url);
                 
                 //appending rating text and mood gifs to the appropriate div
                 $("#mood-gifs").append(p);
-                $("#mood-gifs").append(moodButton);
+                $("#mood-gifs").append(moodImage);
 
                 
                 }
                 
             }
-            
-            
+             
+        })
+
         });
+
+    //onclick event listener for input
+
+    //onclick event listener for new buttons
+    $(".new").on("click", function () {
+    
+    });
         //
 
         //
