@@ -1,3 +1,8 @@
+/* General */
+.container {
+    margin: 40px 200px 0px 200px;
+}
+
 body, button {
     font-family: 'Montserrat', sans-serif;
     color: #484848;
@@ -7,10 +12,7 @@ p {
     margin: 10px;
 }
 
-.container {
-    margin: 40px 200px 0px 200px;
-}
-
+/* Buttons */
 .existing, #submit, .new {
     padding: 5px;
     background-color: #F0F0F0;
@@ -20,11 +22,12 @@ p {
     margin: 5px;
 }
 
-.existing:hover {
+.existing:hover, .new:hover {
     background-color: #B4EEB4;
     color: white;
 }
 
+/* "Add button" box */
 #formBox {
     float: right;
     background-color: #B4EEB4;
@@ -33,4 +36,9 @@ p {
     border-width: 3px;
     border-radius: 8px;
     margin-right: 30px;
+}
+
+input {
+    border-radius: 4px;
+    border:none;
 }
