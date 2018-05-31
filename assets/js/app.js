@@ -4,8 +4,8 @@
 
 // BUTTONS EVENTS __________________________________________________________________________________________________________________________________________________
     
-    //onclick event listener for user input
-    //create a new button and print it to the screen
+    //onclick event listener for USER GENERATED BUTTONS
+    //Take input, create a new button, and print it to the screen
     $("#submit").on("click", function () {
         var input = $("#mood-input").val().trim();
         var newButton = $("<button>").addClass("new");
@@ -17,8 +17,8 @@
 
         $("<input>").empty();
 
-    //onclick event listener for new buttons
-    //same function as existing buttons, but just calling it by its diff class
+    //onclick event listener for NEW BUTTONS
+    //pull gifs and print to screen
         $(".new").on("click", function () {
 
             $("#mood-gifs").empty();
@@ -39,21 +39,22 @@
                 
                         var rating = results[i].rating;
                         var p = $("<p>").text("Rating: " + rating);
-                        var moodImage = $("<img>");
-                        moodImage.attr("src", results[i].images.fixed_height.url);
+                        var moodImage = $("<img>").addClass("gif");
+                        moodImage.attr("src", results[i].images.fixed_height_still.url);
+                        moodImage.attr("data-state", "still");
+                        // moodImage.attr("data-still", results[i].images.fixed_height_still.url);
+                        // moodImage.attr("data-animate", results[i].images.fixed_height.url);
                     
                     $("#mood-gifs").append(p);
                     $("#mood-gifs").append(moodImage);
-    
-                    console.log("works")
                     }
                 }   
             })
-            });
+        });
     });
 
     
-    //onclick event listener for existing buttons
+    //onclick event listener for EXISTING BUTTONS
     $(".existing").on("click", function () {
 
         //clear old results
@@ -80,7 +81,6 @@
 
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                 
-
                 //store the gif rating and print it to screen
                     var rating = results[i].rating;
 
@@ -88,38 +88,43 @@
 
                 //create an image tag to store the pulled gif into. Set src to the Gif link from giphy, within that new img tag.
                 //display that gif in a still format
-                    var moodImage = $("<img>");
-                    moodImage.attr("src", results[i].images.fixed_height.url);
+                    var moodImage = $("<img>").addClass("gif");
+                    moodImage.attr("src", results[i].images.fixed_height_still.url);
+                    moodImage.attr("data-still", results[i].images.fixed_height_still.url);
+                    moodImage.attr("data-animate", results[i].images.fixed_height.url);
+                    moodImage.attr("data-state", "still");
+                    // moodImage.attr("data-still", results[i].images.fixed_height_still.url);
+                    // moodImage.attr("data-animate", results[i].images.fixed_height.url);
+
                 
                 //appending rating text and mood gifs to the appropriate div
                 $("#mood-gifs").append(p);
                 $("#mood-gifs").append(moodImage);
+
+
+        //onclick event to make gifs be "still" or "animated"
+        //"_s.gif" = still gif
+                
+                
                 }
             }   
         })
-        });
-
-
-   
-    
-
-
-
+    });
 
 // GIF START/STOP EVENTS ____________________________________________________________________________________________________________________________________________
-
-    //onclick event to make gifs be "still" or "animated"
-    //"_s.gif" = still gif
-    $("<img>").on("click", function() {
-      var gifStatus = $(this).attr("data-state= 'still'");
-
-      if (gifStatus === "still") {
-        $(this).attr('src', src.replace(/\.gif/i, "_s.gif"))
-
-        $(this).attr("src", $(this).attr("data-animate"));
-        $(this).attr("data-state", "animate");
-      } else {
-        $(this).attr("src", $(this).attr("data-still"));
-        $(this).attr("data-state", "still");
-      }
-    });
+$("#mood-gifs").on("click", ".gif", function() {
+            console.log($(this)) ;
+    if ($(this).attr("data-state") === "still") {
+        
+        var animateURL = $(this).attr("data-animate");
+        
+        $(this).attr("src", animateURL);
+        $(".gif").attr("data-state", "animated");
+    }
+        else {
+            var stillURL = $(this).attr("data-still");
+            
+            $(this).attr("src", stillURL);
+            $(".gif").attr("data-state", "still");
+    }
+  });   

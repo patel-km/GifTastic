@@ -8,6 +8,12 @@ body, button {
     color: #484848;
 }
 
+h1 {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
 p {
     margin: 10px;
 }
