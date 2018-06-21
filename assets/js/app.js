@@ -37,15 +37,13 @@
     
                     if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                 
-                        var rating = results[i].rating;
-                        var p = $("<p>").text("Rating: " + rating);
+                        // var rating = results[i].rating;
+                        // var p = $("<p>").text("Rating: " + rating);
                         var moodImage = $("<img>").addClass("gif");
                         moodImage.attr("src", results[i].images.fixed_height_still.url);
                         moodImage.attr("data-state", "still");
-                        // moodImage.attr("data-still", results[i].images.fixed_height_still.url);
-                        // moodImage.attr("data-animate", results[i].images.fixed_height.url);
                     
-                    $("#mood-gifs").append(p);
+                    // $("#mood-gifs").append(p);
                     $("#mood-gifs").append(moodImage);
                     }
                 }   
@@ -82,9 +80,9 @@
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                 
                 //store the gif rating and print it to screen
-                    var rating = results[i].rating;
+                    // var rating = results[i].rating;
 
-                    var p = $("<p>").text("Rating: " + rating);
+                    // var p = $("<p>").text("Rating: " + rating);
 
                 //create an image tag to store the pulled gif into. Set src to the Gif link from giphy, within that new img tag.
                 //display that gif in a still format
@@ -93,12 +91,10 @@
                     moodImage.attr("data-still", results[i].images.fixed_height_still.url);
                     moodImage.attr("data-animate", results[i].images.fixed_height.url);
                     moodImage.attr("data-state", "still");
-                    // moodImage.attr("data-still", results[i].images.fixed_height_still.url);
-                    // moodImage.attr("data-animate", results[i].images.fixed_height.url);
 
                 
                 //appending rating text and mood gifs to the appropriate div
-                $("#mood-gifs").append(p);
+                // $("#mood-gifs").append(p);
                 $("#mood-gifs").append(moodImage);
 
 

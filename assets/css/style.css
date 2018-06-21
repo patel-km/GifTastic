@@ -1,8 +1,15 @@
 /* General */
 .container {
     margin: 40px 200px 0px 200px;
+    background: white;
+    opacity: 0.8;
+    padding: 35px;
+    overflow: auto;
 }
 
+body {
+    background-image: url("../images/bg.jpg");
+}
 body, button {
     font-family: 'Montserrat', sans-serif;
     color: #484848;
@@ -15,6 +22,12 @@ h1 {
 }
 
 p {
+    margin: 10px;
+}
+
+/* Gifs */
+img {
+    float:left;
     margin: 10px;
 }
 
@@ -35,6 +48,7 @@ p {
 
 /* "Add button" box */
 #formBox {
+    display: block;
     float: right;
     background-color: #B4EEB4;
     padding: 5px;
@@ -42,6 +56,10 @@ p {
     border-width: 3px;
     border-radius: 8px;
     margin-right: 30px;
+}
+
+#mood-form {
+    display: block;
 }
 
 input {
